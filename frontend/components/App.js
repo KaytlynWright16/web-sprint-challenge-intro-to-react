@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios'
 import Character from './Character'
 
 const urlPlanets = 'http://localhost:9009/api/planets'
@@ -13,8 +12,8 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const [peopleResponse, planetsResponse] = await Promise.all([
-        fetch('http://localhost:9009/api/people'),
-        fetch('http://localhost:9009/api/planets'),
+        fetch(urlPeople),
+        fetch(urlPlanets),
       ]);
       const peopleData = await peopleResponse.json();
       const planetsData = await planetsResponse.json();
@@ -38,14 +37,10 @@ useEffect(() => {
       <h2>Star Wars Characters</h2>
       <p>See the README of the project for instructions on completing this challenge</p>
       {/* ❗ Map over the data in state, rendering a Character at each iteration */}
-      {characters.length > 0 ? (
-        characters.map(character => (
-          
-        ))
-      
-      ) : (
-        Loading characters...
-      )}
+    
+      {
+characters.map(character => <Character key={character.id} data={character} /> )
+}
     </div>
   )
 }
